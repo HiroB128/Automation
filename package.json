@@ -1,0 +1,23 @@
+{
+  "name": "stock-order-automation",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "playwright/playwrightScript.js",
+  "scripts": {
+    "start": "node playwright/playwrightScript.js",
+    "test": "playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "@types/node": "^20.14.9"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "playwright": "^1.45.0"
+  }
+}
