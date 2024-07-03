@@ -1,14 +1,14 @@
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "startAutomation") {
     console.log("Received message to start automation");
-
+    //orderDataをローカルストレージから取得
     chrome.storage.local.get("orderData", function (result) {
-      console.log("Attempting to retrieve 'orderData':", result); // 取得を試みるログ出力
+      console.log("Attempting to retrieve 'orderData':", result);
       if (result.orderData) {
         const orderData = result.orderData;
-        console.log("Order data to be sent:", orderData); // ログ出力
-        console.log("Sending request to http://localhost:3000/order"); // ログ出力
-
+        console.log("Order data to be sent:", orderData);
+        console.log("Sending request to http://localhost:3000/order");
+        //POSTリクエスト
         fetch("http://localhost:3000/order", {
           method: "POST",
           headers: {
@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           .then((response) => {
             console.log("Response status:", response.status);
             if (!response.ok) {
-              throw new Error("Network response was not ok");
+              // throw new Error("Network response was not ok");
             }
             return response.json();
           })
