@@ -1,4 +1,4 @@
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message) => {
   if (message.action === "startAutomation") {
     console.log("Received message to start automation");
 
@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           .then((response) => {
             console.log("Response status:", response.status);
             if (!response.ok) {
-              throw new Error("Network response was not ok");
+              // throw new Error("Network response was not ok");
             }
             return response.json();
           })

@@ -7,6 +7,7 @@ document
       stockName: document.getElementById("stockName").value,
       orderType: document.getElementById("orderType").value,
       quantity: document.getElementById("quantity").value,
+      tradeType: document.getElementById("tradeType").value,
       price: document.getElementById("price").value,
     };
 

@@ -8,7 +8,7 @@ app.use(cors()); // CORSを有効にする
 app.use(bodyParser.json());
 
 app.post("/order", async (req, res) => {
-  const { stockName, orderType, quantity, price } = req.body;
+  const { stockName, orderType, quantity, price, tradeType } = req.body;
   console.log("Received order data:", req.body);
 
   try {
@@ -59,16 +59,20 @@ app.post("/order", async (req, res) => {
       console.log("Selected 信用 order type");
     }
 
-    // 数量、価格の入力と発注の共通処理
+    // 数量
     console.log("Entering quantity");
     await page.getByPlaceholder("数量を入力").click();
     await page.getByPlaceholder("数量を入力").fill(quantity.toString());
     console.log("Quantity entered");
 
-    console.log("Entering price");
-    await page.getByPlaceholder("指値を入力").click();
-    await page.getByPlaceholder("指値を入力").fill(price.toString());
-    console.log("Price entered");
+    if (tradeType === "指値") {
+      console.log("指値注文");
+      await page.getByText("指値", { exact: true }).click();
+      await page.getByPlaceholder("指値を入力").fill(price.toString());
+      console.log("指値注文", price);
+    } else if (tradeType === "成行") {
+      await page.getByText("成行").click();
+    }
 
     console.log("Entering trade Pin");
     await page.waitForSelector('input[placeholder="取引暗証番号を入力"]', {
