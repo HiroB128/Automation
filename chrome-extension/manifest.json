@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Stock Trade Automation",
+  "name": "DMM株自動発注",
   "version": "1.0",
   "host_permissions": ["http://*/*", "https://*/*"],
   "permissions": ["storage"],
@@ -9,5 +9,10 @@
   },
   "background": {
     "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/DMM16px.png",
+    "48": "icons/DMM48px.png",
+    "128": "icons/DMM128px.png"
   }
 }

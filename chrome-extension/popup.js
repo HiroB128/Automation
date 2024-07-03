@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
 
     const orderData = {
+      accountNumber: document.getElementById("accountNumber").value,
       stockName: document.getElementById("stockName").value,
       orderType: document.getElementById("orderType").value,
       quantity: document.getElementById("quantity").value,
