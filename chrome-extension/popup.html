@@ -6,17 +6,25 @@
     <style>
       body {
         font-family: aral, sens-serif;
+        margin: 0;
+        padding: 0;
+      }
+      #orderForm {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
         width: 300px;
       }
       label {
         display: black;
-        margin: 8px 0 4px;
+        margin-top: auto;
       }
       input,
       select {
         width: 100%;
         padding: 8px;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+        box-sizing: border-box;
       }
       button {
         width: 100%;
@@ -35,7 +43,12 @@
   <body>
     <form id="orderForm">
       <label for="stockName">銘柄名</label>
-      <input type="text" id="stockName" name="stockName" /><br />
+      <input
+        type="text"
+        id="stockName"
+        name="stockName"
+        placeholder="例：3998・AAPL"
+      /><br />
       <label for="orderType">取引種別</label>
       <select id="orderType" name="orderType">
         <option value="現物">現物</option>
