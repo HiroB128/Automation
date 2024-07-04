@@ -5,64 +5,86 @@
     <title>Stock Trade Automation</title>
     <style>
       body {
-        font-family: aral, sens-serif;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
         margin: 0;
         padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
       }
       #orderForm {
-        display: flex;
-        flex-direction: column;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 20px;
         width: 300px;
+        display: flex;
+        flex-direction: column;
       }
-      label {
-        display: black;
-        margin-top: auto;
-      }
-      input,
-      select {
-        width: 100%;
-        padding: 8px;
+      #orderForm label {
+        font-weight: bold;
+        /* margin-top: 10px; */
         margin-bottom: 5px;
-        box-sizing: border-box;
       }
-      button {
+      #orderForm input,
+      #orderForm select {
         width: 100%;
         padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      #orderForm button {
+        width: 100%;
+        padding: 12px;
         background-color: #4caf50;
         color: white;
         border: none;
+        border-radius: 5px;
         cursor: pointer;
+        font-size: 16px;
       }
-      button:hover {
+      #orderForm button:hover {
         background-color: #45a049;
+      }
+      #orderForm .error {
+        color: red;
+        font-size: 14px;
+        margin-top: -10px;
+        margin-bottom: 10px;
       }
     </style>
     <script src="popup.js" defer></script>
   </head>
   <body>
     <form id="orderForm">
+      <label for="accountNumber">メールアドレス/ログインID</label>
+      <input type="text" id="accountNumber" name="accountNumber" required />
       <label for="stockName">銘柄名</label>
       <input
         type="text"
         id="stockName"
         name="stockName"
-        placeholder="例：3998・AAPL"
-      /><br />
+        placeholder="例:3998・AAPL"
+        required
+      />
       <label for="orderType">取引種別</label>
       <select id="orderType" name="orderType">
         <option value="現物">現物</option>
-        <option value="信用">信用</option></select
-      ><br />
+        <option value="信用">信用</option>
+      </select>
       <label for="quantity">数量</label>
-      <input type="number" id="quantity" name="quantity" /><br />
+      <input type="number" id="quantity" name="quantity" required />
       <label for="tradeType">指値・現物</label>
       <select id="tradeType" name="tradeType">
         <option value="指値">指値</option>
-        <option value="成行">成行</option></select
-      ><br />
+        <option value="成行">成行</option>
+      </select>
       <label for="price">値段</label>
-      <input type="number" id="price" name="price" /><br />
+      <input type="number" id="price" name="price" required />
       <button type="submit">発注</button>
     </form>
   </body>

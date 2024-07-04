@@ -8,7 +8,8 @@ app.use(cors()); // CORSを有効にする
 app.use(bodyParser.json());
 
 app.post("/order", async (req, res) => {
-  const { stockName, orderType, quantity, price, tradeType } = req.body;
+  const { stockName, orderType, quantity, price, tradeType, accountNumber } =
+    req.body;
   console.log("Received order data:", req.body);
 
   try {
@@ -25,7 +26,7 @@ app.post("/order", async (req, res) => {
     // ログインIDを入力
     console.log("Entering login ID");
     await page.locator('input[name="login-id"]').click();
-    await page.locator('input[name="login-id"]').fill("66000020");
+    await page.locator('input[name="login-id"]').fill(accountNumber.toString());
     await page.getByText("ログイン", { exact: true }).click();
     console.log("Login ID click");
 
@@ -88,7 +89,14 @@ app.post("/order", async (req, res) => {
 
     console.log("Clicking on place order");
     await page.getByText("発注", { exact: true }).click();
-    console.log("Order placed");
+    console.log(
+      accountNumber,
+      stockName,
+      orderType,
+      "数量:" + quantity,
+      "値段:" + price,
+      tradeType + "で注文いたしました"
+    );
 
     // 終了処理
     await browser.close();

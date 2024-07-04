@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (tradeTypeSelect.value === "成行") {
       priceInput.disabled = true;
       priceInput.value = ""; // 成行の場合、priceフィールドをクリア
+      // errorMessage.textContent = "";
     } else {
       priceInput.disabled = false;
     }
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
 
     const orderData = {
+      accountNumber: document.getElementById("accountNumber").value,
       stockName: document.getElementById("stockName").value,
       orderType: document.getElementById("orderType").value,
       quantity: document.getElementById("quantity").value,
