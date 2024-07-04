@@ -89,7 +89,14 @@ app.post("/order", async (req, res) => {
 
     console.log("Clicking on place order");
     await page.getByText("発注", { exact: true }).click();
-    console.log(req.body + "で注文いたしました");
+    console.log(
+      accountNumber,
+      stockName,
+      orderType,
+      "数量:" + quantity,
+      "値段:" + price,
+      tradeType + "で注文いたしました"
+    );
 
     // 終了処理
     await browser.close();
