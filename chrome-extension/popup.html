@@ -8,7 +8,6 @@
         font-family: Arial, sans-serif;
         background-color: #f4f4f9;
         margin: 0;
-        padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -25,12 +24,10 @@
       }
       #orderForm label {
         font-weight: bold;
-        /* margin-top: 10px; */
         margin-bottom: 5px;
       }
       #orderForm input,
       #orderForm select {
-        width: 100%;
         padding: 10px;
         margin-bottom: 15px;
         border: 1px solid #ddd;
@@ -50,12 +47,6 @@
       #orderForm button:hover {
         background-color: #45a049;
       }
-      #orderForm .error {
-        color: red;
-        font-size: 14px;
-        margin-top: -10px;
-        margin-bottom: 10px;
-      }
     </style>
     <script src="popup.js" defer></script>
   </head>
@@ -63,6 +54,7 @@
     <form id="orderForm">
       <label for="accountNumber">メールアドレス/ログインID</label>
       <input type="text" id="accountNumber" name="accountNumber" required />
+
       <label for="stockName">銘柄名</label>
       <input
         type="text"
@@ -71,20 +63,61 @@
         placeholder="例:3998・AAPL"
         required
       />
-      <label for="orderType">取引種別</label>
+
+      <label>取引種別</label>
+      <div style="display: flex">
+        <input
+          type="radio"
+          name="orderType"
+          id="orderType1"
+          value="現物"
+          required
+        /><label for="orderType1">現物</label>
+        <input
+          type="radio"
+          name="orderType"
+          id="orderType2"
+          value="信用"
+          required
+        /><label for="orderType2">信用</label>
+      </div>
+
+      <!-- <label for="orderType">取引種別</label>
       <select id="orderType" name="orderType">
         <option value="現物">現物</option>
         <option value="信用">信用</option>
-      </select>
+      </select> -->
+
       <label for="quantity">数量</label>
       <input type="number" id="quantity" name="quantity" required />
-      <label for="tradeType">指値・現物</label>
+
+      <label>指値・成行</label>
+      <div style="display: flex">
+        <input
+          type="radio"
+          name="tradeType"
+          id="tradeType1"
+          value="指値"
+          required
+        /><label for="tradeType1">指値</label>
+        <input
+          type="radio"
+          name="tradeType"
+          id="tradeType2"
+          value="成行"
+          required
+        /><label for="tradeType2">成行</label>
+      </div>
+
+      <!-- <label for="tradeType">指値・現物</label>
       <select id="tradeType" name="tradeType">
         <option value="指値">指値</option>
         <option value="成行">成行</option>
-      </select>
+      </select> -->
+
       <label for="price">値段</label>
       <input type="number" id="price" name="price" required />
+
       <button type="submit">発注</button>
     </form>
   </body>
