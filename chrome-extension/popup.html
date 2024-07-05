@@ -3,55 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Stock Trade Automation</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-      #orderForm {
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        width: 300px;
-        display: flex;
-        flex-direction: column;
-        label {
-          font-weight: bold;
-          margin-bottom: 5px;
-        }
-        input,
-        select {
-          padding: 10px;
-          margin-bottom: 15px;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          box-sizing: border-box;
-        }
-
-        button {
-          width: 100%;
-          padding: 12px;
-          background-color: #4caf50;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-          font-size: 16px;
-        }
-        button:hover {
-          background-color: #45a049;
-        }
-        .radioContext {
-          font-weight: normal;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
     <script src="popup.js" defer></script>
   </head>
   <body>
@@ -68,6 +20,26 @@
         required
       />
 
+      <label>株の種類</label>
+      <div style="display: flex">
+        <input
+          type="radio"
+          name="stockType"
+          id="stockTypeJapan"
+          value="日本株"
+          required
+        />
+        <label for="stockTypeJapan" class="radioContext">日本株</label>
+        <input
+          type="radio"
+          name="stockType"
+          id="stockTypeUSA"
+          value="米国株"
+          required
+        />
+        <label for="stockTypeUSA" class="radioContext">米国株</label>
+      </div>
+
       <label>取引種別</label>
       <div style="display: flex">
         <input
@@ -76,18 +48,32 @@
           id="orderType1"
           value="現物"
           required
-        /><label for="orderType1" class="radioContext">現物</label>
+        />
+        <label for="orderType1" class="radioContext">現物</label>
         <input
           type="radio"
           name="orderType"
           id="orderType2"
           value="信用"
           required
-        /><label for="orderType2" class="radioContext">信用</label>
+        />
+        <label for="orderType2" class="radioContext">信用</label>
       </div>
 
       <label for="quantity">数量</label>
       <input type="number" id="quantity" name="quantity" required />
+
+      <label>決済通貨</label>
+      <div id="currencyRadioContainer" class="radio-group">
+        <div class="radio-item">
+          <input type="radio" name="Currency" id="CurrencyYen" value="円" />
+          <label for="CurrencyYen" class="radioContext">円</label>
+        </div>
+        <div class="radio-item hidden" id="usdRadioItem">
+          <input type="radio" name="Currency" id="CurrencyUSD" value="USD" />
+          <label for="CurrencyUSD" class="radioContext">USD</label>
+        </div>
+      </div>
 
       <label>指値・成行</label>
       <div style="display: flex">
@@ -97,14 +83,16 @@
           id="tradeType1"
           value="指値"
           required
-        /><label for="tradeType1" class="radioContext">指値</label>
+        />
+        <label for="tradeType1" class="radioContext">指値</label>
         <input
           type="radio"
           name="tradeType"
           id="tradeType2"
           value="成行"
           required
-        /><label for="tradeType2" class="radioContext">成行</label>
+        />
+        <label for="tradeType2" class="radioContext">成行</label>
       </div>
 
       <label for="price">値段</label>

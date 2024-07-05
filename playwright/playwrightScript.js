@@ -8,8 +8,15 @@ app.use(cors()); // CORSを有効にする
 app.use(bodyParser.json());
 
 app.post("/order", async (req, res) => {
-  const { stockName, orderType, quantity, price, tradeType, accountNumber } =
-    req.body;
+  const {
+    stockName,
+    orderType,
+    quantity,
+    price,
+    tradeType,
+    accountNumber,
+    currency,
+  } = req.body;
   console.log("Received order data:", req.body);
 
   try {
@@ -66,6 +73,13 @@ app.post("/order", async (req, res) => {
     await page.getByPlaceholder("数量を入力").fill(quantity.toString());
     console.log("Quantity entered");
 
+    if (currency === "円") {
+      await page.locator("div").filter({ hasText: /^円$/ }).click();
+    } else if (currency === "USD") {
+      await page.getByText("USD", { exact: true }).nth(2).click();
+    }
+    console.log(currency);
+
     if (tradeType === "指値") {
       console.log("指値注文");
       await page.getByText("指値", { exact: true }).click();
@@ -94,6 +108,7 @@ app.post("/order", async (req, res) => {
       stockName,
       orderType,
       "数量:" + quantity,
+      currency,
       "値段:" + price,
       tradeType + "で注文いたしました"
     );
