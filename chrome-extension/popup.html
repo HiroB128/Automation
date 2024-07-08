@@ -21,7 +21,7 @@
       />
 
       <label>株の種類</label>
-      <div style="display: flex">
+      <div class="radio-group">
         <input
           type="radio"
           name="stockType"
@@ -41,7 +41,7 @@
       </div>
 
       <label>取引種別</label>
-      <div style="display: flex">
+      <div class="radio-group">
         <input
           type="radio"
           name="orderType"
@@ -65,18 +65,50 @@
 
       <label>決済通貨</label>
       <div id="currencyRadioContainer" class="radio-group">
-        <div class="radio-item">
-          <input type="radio" name="Currency" id="CurrencyYen" value="円" />
-          <label for="CurrencyYen" class="radioContext">円</label>
-        </div>
-        <div class="radio-item hidden" id="usdRadioItem">
-          <input type="radio" name="Currency" id="CurrencyUSD" value="USD" />
-          <label for="CurrencyUSD" class="radioContext">USD</label>
-        </div>
+        <input type="radio" name="Currency" id="CurrencyYen" value="円" />
+        <label for="CurrencyYen" class="radioContext">円</label>
+        <input
+          type="radio"
+          name="Currency"
+          id="CurrencyUSD"
+          value="USD"
+          class="hidden"
+        />
+        <label for="CurrencyUSD" class="radioContext hidden">USD</label>
+      </div>
+
+      <label>預り区分</label>
+      <div class="radio-group">
+        <input
+          type="radio"
+          name="protectionType"
+          id="protection"
+          value="保護"
+          required
+        />
+        <label for="protection" class="radioContext">保護</label>
+        <input
+          type="radio"
+          name="protectionType"
+          id="SubstitutionJapan"
+          value="日本株信用代用"
+          required
+        />
+        <label for="SubstitutionJapan" class="radioContext"
+          >日本株信用代用</label
+        >
+        <input
+          type="radio"
+          name="protectionType"
+          id="SubsitutionUS"
+          value="米国株信用代用"
+          required
+        />
+        <label for="SubsitutionUS" class="radioContext">米国株信用代用</label>
       </div>
 
       <label>指値・成行</label>
-      <div style="display: flex">
+      <div class="radio-group">
         <input
           type="radio"
           name="tradeType"

@@ -16,6 +16,7 @@ app.post("/order", async (req, res) => {
     tradeType,
     accountNumber,
     currency,
+    protectionType,
   } = req.body;
   console.log("Received order data:", req.body);
 
@@ -80,6 +81,15 @@ app.post("/order", async (req, res) => {
     }
     console.log(currency);
 
+    if (protectionType === "保護") {
+      await page.getByRole("button", { name: "保護" }).click();
+    } else if (protectionType === "日本株信用代用") {
+      await page.getByRole("button", { name: "日本株信用代用" }).click();
+    } else if (protectionType === "米国株信用代用") {
+      await page.getByRole("button", { name: "米国株信用代用" }).click();
+    }
+    console.log(protectionType);
+
     if (tradeType === "指値") {
       console.log("指値注文");
       await page.getByText("指値", { exact: true }).click();
@@ -107,8 +117,9 @@ app.post("/order", async (req, res) => {
       accountNumber,
       stockName,
       orderType,
-      "数量:" + quantity,
       currency,
+      "数量:" + quantity,
+      protectionType,
       "値段:" + price,
       tradeType + "で注文いたしました"
     );
