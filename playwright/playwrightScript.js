@@ -8,8 +8,16 @@ app.use(cors()); // CORSを有効にする
 app.use(bodyParser.json());
 
 app.post("/order", async (req, res) => {
-  const { stockName, orderType, quantity, price, tradeType, accountNumber } =
-    req.body;
+  const {
+    stockName,
+    orderType,
+    quantity,
+    price,
+    tradeType,
+    accountNumber,
+    currency,
+    protectionType,
+  } = req.body;
   console.log("Received order data:", req.body);
 
   try {
@@ -66,6 +74,22 @@ app.post("/order", async (req, res) => {
     await page.getByPlaceholder("数量を入力").fill(quantity.toString());
     console.log("Quantity entered");
 
+    if (currency === "円") {
+      await page.locator("div").filter({ hasText: /^円$/ }).click();
+    } else if (currency === "USD") {
+      await page.getByText("USD", { exact: true }).nth(2).click();
+    }
+    console.log(currency);
+
+    if (protectionType === "保護") {
+      await page.getByRole("button", { name: "保護" }).click();
+    } else if (protectionType === "日本株信用代用") {
+      await page.getByRole("button", { name: "日本株信用代用" }).click();
+    } else if (protectionType === "米国株信用代用") {
+      await page.getByRole("button", { name: "米国株信用代用" }).click();
+    }
+    console.log(protectionType);
+
     if (tradeType === "指値") {
       console.log("指値注文");
       await page.getByText("指値", { exact: true }).click();
@@ -93,7 +117,9 @@ app.post("/order", async (req, res) => {
       accountNumber,
       stockName,
       orderType,
+      currency,
       "数量:" + quantity,
+      protectionType,
       "値段:" + price,
       tradeType + "で注文いたしました"
     );
